@@ -769,7 +769,8 @@
 
     .cal-embed {
       width: 100%;
-      min-height: 640px;
+      height: 640px;
+      /* fixed height => the calendar scrolls its own time list instead of growing the page */
       border: 1px solid var(--line);
       border-radius: 20px;
       overflow: hidden;
@@ -777,7 +778,15 @@
     }
 
     .cal-embed iframe {
+      width: 100% !important;
+      height: 100% !important;
       border-radius: 20px;
+    }
+
+    @media(max-width:760px) {
+      .cal-embed {
+        height: 760px;
+      }
     }
 
     /* ---------- Contact ---------- */
@@ -1189,6 +1198,33 @@
       .hero-top-links {
         top: 24px;
         right: 20px
+      }
+    }
+
+    /* ---- Mobile hero: photo drops below the name instead of overlapping ---- */
+    @media(max-width:760px) {
+      .hero-center {
+        transform: translateY(-3vh);
+      }
+
+      .headshot {
+        position: relative;
+        top: auto;
+        left: auto;
+        margin: 34px auto 0;
+        transform: translateY(22px) scale(.85);
+        width: clamp(150px, 46vw, 210px);
+        height: clamp(150px, 46vw, 210px);
+      }
+
+      body.revealed .headshot {
+        animation: pop-in 1.05s cubic-bezier(.34, 1.56, .64, 1) .38s forwards;
+      }
+    }
+
+    @media(max-width:760px) and (prefers-reduced-motion: reduce) {
+      .headshot {
+        transform: none;
       }
     }
   </style>
